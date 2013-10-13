@@ -39,6 +39,7 @@ public class rbm {
 	private Matrix data = new Matrix(1,numdims);
 	private Matrix vishid = new Matrix(numdims,numhid);
 	
+	test;
     //generate the initial random weights of each path	
 	public void getvishid(){
 		double[][] temp1 = new double[numdims][numhid];
