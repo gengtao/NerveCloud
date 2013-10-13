@@ -134,8 +134,8 @@ public class rbm {
 	    }
 	
 	public int run(int epoch, int epochmax){
+        getvishid();
 		for (int i = epoch; i < epochmax; i++ ){
-			getvishid();
 			Matrix poshidstates = getposphase();
 			getnegphase(poshidstates);
 			update(epoch);
