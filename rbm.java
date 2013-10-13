@@ -10,7 +10,6 @@
 // restart   -- set to 1 if learning starts from beginning 
 
 package rbm;
-import Jama.Matrix;
 import java.util.Random;
 import java.lang.Math;
 
