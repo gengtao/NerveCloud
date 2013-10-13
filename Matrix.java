@@ -16,7 +16,7 @@ class Matrix{
     private double[][] A;
     private int m, n;
     
-    //constructor
+    //constructors
     public Matrix (int m, int n) {
         this.m = m;
         this.n = n;
@@ -87,6 +87,18 @@ class Matrix{
                 throw new IllegalArgumentException
                 ("All rows must have the same length.");
             }
+            for (int j = 0; j < n; j++) {
+                C[i][j] = A[i][j];
+            }
+        }
+        return X;
+    }
+    
+    //Make a deep copy of a matrix
+    public Matrix copy () {
+        Matrix X = new Matrix(m,n);
+        double[][] C = X.getArray();
+        for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
                 C[i][j] = A[i][j];
             }
