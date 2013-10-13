@@ -39,9 +39,9 @@ public class rbm {
 	private Matrix data = new Matrix(1,numdims);
 	private Matrix vishid = new Matrix(numdims,numhid);
 	
-	test;
     //generate the initial random weights of each path	
-	public void getvishid(){
+    
+	private void  initialize(Matrix inputData){
 		double[][] temp1 = new double[numdims][numhid];
 		Random randomgenerator = new Random();
 		for(int i = 0; i < numdims; i++){
@@ -50,11 +50,12 @@ public class rbm {
 				}
 			}
 		vishid = new Matrix(temp1);
+		data = inputData;
 	}
 	//Start calculate the positive phase
 	//calculate the cured value of h0
 	
-	public Matrix getposphase(){
+	private Matrix getposphase(){
 		Matrix product_tmp1 = data.times(vishid);
 		//(1 * numdims) * (numdims * numhid)
 		product_tmp1.plusEquals(hidbiases);
@@ -86,7 +87,7 @@ public class rbm {
 	
 	//start calculate the negative phase
 	//calculate the curved value of v1,h1
-	public void getnegphase(Matrix poshidstates){
+	private void getnegphase(Matrix poshidstates){
 		//find the vector of v1
 		Matrix product_tmp1 = poshidstates.times(vishid.transpose());
 		//(1 * numhid) * (numhid * numdims) = (1 * numdims)
@@ -118,7 +119,7 @@ public class rbm {
 		}
 	
 	//update the weights and biases
-	public void update(int epoch){
+	private void update(int epoch){
 		double momentum;
 		if (epoch > 5)
 			momentum = finalmomentum;
@@ -134,12 +135,12 @@ public class rbm {
 	    vishid.plusEquals(vishidinc);
 	    }
 	
-	public int run(int epoch, int epochmax){
-		for (int i = epoch; i < epochmax; i++ ){
-			getvishid();
+	public int run(int epochmax, Matrix inputData){
+		initialize(inputData);
+		for (int i = 1; i < epochmax; i++ ){
 			Matrix poshidstates = getposphase();
 			getnegphase(poshidstates);
-			update(epoch);
+			update(i);
 		}
 		return (0);
 		}
